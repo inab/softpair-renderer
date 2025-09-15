@@ -25,17 +25,17 @@ This will output the combined HTML to preview_pair.html.
 ## How to generate annotation tasks for multiple pairs
 
 If you have a list of pairs and want each pair annotated by 3 different annotators (balanced across all annotators):
-1.	Edit assignment.py to list your pairs and annotators.
-2.	Run:
+1. Edit assignment.py to list your pairs and annotators.
+2. Run:
     ```python
     python assignment.py
     ```
 
-3.	This produces a tasks.json file in JSON array format, which Label Studio accepts.
+3. This produces a tasks.json file in JSON array format, which Label Studio accepts.
 Each task includes:
-  - the rendered HTML (`data.html`)
-  - the pair_id
-  - the assigned annotator
+   - the rendered HTML (`data.html`)
+   - the pair_id
+   - the assigned annotator
 
     Example task: 
 
