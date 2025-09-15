@@ -31,6 +31,7 @@ def build_array_tasks(pairs, annotators, k=3):
 
 if __name__ == "__main__":
     pairs = [f"pair-{i:03d}" for i in range(1, 6)]  # example: 5 pairs
+    
     annotators = [
         "Captain Curator",
         "DocuSaurus Rex",

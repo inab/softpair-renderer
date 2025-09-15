@@ -1,0 +1,122 @@
+[
+  {
+    "id": "6f4bf9c7-6042-4279-af3f-576986a6cc98",
+    "data": {
+      "pair_id": "pair-001",
+      "annotator": "Captain Curator",
+      "html": "<div><strong>pair-001</strong>: (A/B HTML goes here)</div>"
+    }
+  },
+  {
+    "id": "bfff552c-4941-4d1e-8bb8-abc2a80c20ea",
+    "data": {
+      "pair_id": "pair-001",
+      "annotator": "DocuSaurus Rex",
+      "html": "<div><strong>pair-001</strong>: (A/B HTML goes here)</div>"
+    }
+  },
+  {
+    "id": "b8d08774-8715-484a-9fb5-22fee384f18d",
+    "data": {
+      "pair_id": "pair-001",
+      "annotator": "Miss Label",
+      "html": "<div><strong>pair-001</strong>: (A/B HTML goes here)</div>"
+    }
+  },
+  {
+    "id": "937da220-32b3-483f-90e7-95f4c250017d",
+    "data": {
+      "pair_id": "pair-002",
+      "annotator": "DocuSaurus Rex",
+      "html": "<div><strong>pair-002</strong>: (A/B HTML goes here)</div>"
+    }
+  },
+  {
+    "id": "a29ebf65-c9f8-4593-8ccd-8f187430c1e7",
+    "data": {
+      "pair_id": "pair-002",
+      "annotator": "Miss Label",
+      "html": "<div><strong>pair-002</strong>: (A/B HTML goes here)</div>"
+    }
+  },
+  {
+    "id": "e90422fc-a431-470b-8a26-19d36af909c3",
+    "data": {
+      "pair_id": "pair-002",
+      "annotator": "Bugsy McTag",
+      "html": "<div><strong>pair-002</strong>: (A/B HTML goes here)</div>"
+    }
+  },
+  {
+    "id": "383765b4-ec33-45c6-86ad-699dfecf5f96",
+    "data": {
+      "pair_id": "pair-003",
+      "annotator": "Miss Label",
+      "html": "<div><strong>pair-003</strong>: (A/B HTML goes here)</div>"
+    }
+  },
+  {
+    "id": "763d0ee7-757f-42e9-b720-2578ebf676f8",
+    "data": {
+      "pair_id": "pair-003",
+      "annotator": "Bugsy McTag",
+      "html": "<div><strong>pair-003</strong>: (A/B HTML goes here)</div>"
+    }
+  },
+  {
+    "id": "2af10e6f-b0e1-45ab-bd60-353a47ece5e7",
+    "data": {
+      "pair_id": "pair-003",
+      "annotator": "Judge JudyJSON",
+      "html": "<div><strong>pair-003</strong>: (A/B HTML goes here)</div>"
+    }
+  },
+  {
+    "id": "ba1cf775-94d9-4f4d-8c78-6fa2c2ee5a14",
+    "data": {
+      "pair_id": "pair-004",
+      "annotator": "Bugsy McTag",
+      "html": "<div><strong>pair-004</strong>: (A/B HTML goes here)</div>"
+    }
+  },
+  {
+    "id": "cfbab229-f8d9-4a90-9652-325a76e2fb15",
+    "data": {
+      "pair_id": "pair-004",
+      "annotator": "Judge JudyJSON",
+      "html": "<div><strong>pair-004</strong>: (A/B HTML goes here)</div>"
+    }
+  },
+  {
+    "id": "37f87a40-dd7d-434e-9aa6-8f720a656295",
+    "data": {
+      "pair_id": "pair-004",
+      "annotator": "Professor Pairwise",
+      "html": "<div><strong>pair-004</strong>: (A/B HTML goes here)</div>"
+    }
+  },
+  {
+    "id": "70fb547d-6c04-466d-9420-5cc92bc8630d",
+    "data": {
+      "pair_id": "pair-005",
+      "annotator": "Judge JudyJSON",
+      "html": "<div><strong>pair-005</strong>: (A/B HTML goes here)</div>"
+    }
+  },
+  {
+    "id": "f16232eb-3e63-4b7f-8df0-a73d8ceaaf91",
+    "data": {
+      "pair_id": "pair-005",
+      "annotator": "Professor Pairwise",
+      "html": "<div><strong>pair-005</strong>: (A/B HTML goes here)</div>"
+    }
+  },
+  {
+    "id": "fe2b8add-35e8-42b9-a94f-0ed69bd86d87",
+    "data": {
+      "pair_id": "pair-005",
+      "annotator": "Loopy Looper",
+      "html": "<div><strong>pair-005</strong>: (A/B HTML goes here)</div>"
+    }
+  }
+]
