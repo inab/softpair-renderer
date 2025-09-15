@@ -32,5 +32,18 @@ def main():
 
     print("Wrote preview_pair.html")
 
+    # 4) Put into a Label Studio task
+    task = {
+        "data": {
+            "id" : "pair-001",
+            "html": html_str  # if you POST JSON, you may want to escape it first
+        }
+    }
+
+    # put into JSON file
+    with open("preview_pair.json", "w") as out_file:
+        json.dump(task, out_file, indent=4)
+
+
 if __name__ == "__main__":
     main()
