@@ -1,0 +1,69 @@
+{
+  "_id": {
+    "$oid": "68ae1cd507c9749081c4e3f7"
+  },
+  "source": [
+    "sourceforge/trimal/None/None"
+  ],
+  "timestamp": "2025-08-26T22:45:09.301526",
+  "data": {
+    "name": "trimal",
+    "type": [],
+    "version": [],
+    "label": [
+      "trimal"
+    ],
+    "links": [],
+    "webpage": [
+      "https://trimal.sourceforge.io/"
+    ],
+    "download": [
+      "https://sourceforge.net/projects/trimal"
+    ],
+    "repository": [
+      {
+        "url": "https://sourceforge.net/projects/trimal",
+        "kind": "sourceforge",
+        "source_hasAnonymousAccess": null,
+        "source_isDownloadRegistered": null,
+        "source_isFree": null,
+        "source_isRepoAccessible": null
+      }
+    ],
+    "operating_system": [
+      "Linux",
+      "Windows"
+    ],
+    "source_code": [],
+    "https": false,
+    "ssl": false,
+    "operational": false,
+    "bioschemas": false,
+    "source": [
+      "sourceforge"
+    ],
+    "edam_topics": [],
+    "edam_operations": [],
+    "description": [
+      "TrimAl is a bioinformatic tool that cleans multiple protein or nucleotide sequence alignment. The clean alignment (as a result of the TrimAl cleaning process) is used for phylogenetic reconstruction. TrimAl improves the quality of the reconstructed trees."
+    ],
+    "test": false,
+    "inst_instr": false,
+    "dependencies": [],
+    "contribution_policy": false,
+    "tags": [],
+    "input": [],
+    "output": [],
+    "documentation": [],
+    "license": [],
+    "termsUse": false,
+    "authors": [],
+    "topics": [],
+    "operations": [],
+    "sources_labels": {},
+    "publication": [],
+    "languages": [],
+    "citation": [],
+    "other_names": []
+  }
+}

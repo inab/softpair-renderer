@@ -1,0 +1,230 @@
+{%- macro nl_join(items, sep=', ') -%}
+  {%- if items is string -%}{{ items }}
+  {%- elif items -%}{{ items|reject('equalto', None)|list|join(sep) }}
+  {%- else -%}—
+  {%- endif -%}
+{%- endmacro -%}
+
+{%- macro render_links(urls) -%}
+  {%- if urls is mapping and urls.url -%}
+    <li><a href="{{ urls.url }}" style="color:#2563eb; text-decoration:none;">{{ urls.url }}</a></li>
+  {%- elif urls is string -%}
+    <li><a href="{{ urls }}" style="color:#2563eb; text-decoration:none;">{{ urls }}</a></li>
+  {%- elif urls is sequence -%}
+    {%- for u in urls -%}
+      {{ render_links(u) }}
+    {%- endfor -%}
+  {%- endif -%}
+{%- endmacro -%}
+
+{%- macro render_authors(authors) -%}
+  {%- if not authors -%}—
+  {%- else -%}
+    <ul style="list-style-type: disc; padding-left:22px; margin:6px 0 0 0;">
+      {%- for au in authors -%}
+        {%- set t = au.type or au.get('type') or 'Person' -%}
+        {%- set name = au.name or 'Unknown' -%}
+        {%- set email = au.email -%}
+        <li>
+          {{ name }} ({{ t }}{{ ', ' ~ email if email }})
+        </li>
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
+{%- endmacro -%}
+
+{%- macro render_docs(docs) -%}
+  {%- if not docs -%}—
+  {%- else -%}
+    <ul style="list-style-type: disc; padding-left:22px; margin:6px 0 0 0;">
+      {%- for d in docs -%}
+        {%- if d.url -%}
+          <li>
+            {%- if d.type -%}
+              <span style="font-weight:600;">
+                {{ d.type|replace('_',' ')|title }}
+              </span>:
+              <a href="{{ d.url }}" style="color:#2563eb; text-decoration:none;">
+                {{ d.url }}
+              </a>
+            {%- else -%}
+              <a href="{{ d.url }}" style="color:#2563eb; text-decoration:none;">
+                {{ d.url }}
+              </a>
+            {%- endif -%}
+          </li>
+        {%- elif d.content -%}
+          <li>
+            {%- if d.type -%}
+              <span style="font-weight:600;">{{ d.type|replace('_',' ')|title }}</span>:
+            {%- endif -%}
+            {{ d.content }}
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
+{%- endmacro -%}
+
+{%- macro render_io(items) -%}
+  {%- if not items -%}—
+  {%- else -%}
+    <ul style="list-style-type: disc; padding-left:22px; margin:6px 0 0 0;">
+      {%- for it in items -%}
+        <li>
+          {%- if it.term -%}<span style="font-weight:600;">{{ it.term }}</span>{% if it.vocabulary %} ({{ it.vocabulary }}){% endif %}{%- endif -%}
+          {%- if it.uri %} — <a href="{{ it.uri }}" style="color:#2563eb; text-decoration:none;">{{ it.uri }}</a>{%- endif -%}
+          {%- if it.datatype and (it.datatype.term or it.datatype.uri) -%}
+            <div style="margin-top:2px; font-size:12px; color:#374151;">
+              Datatype: {{ it.datatype.term or '—' }}
+              {%- if it.datatype.uri %} — <a href="{{ it.datatype.uri }}" style="color:#2563eb; text-decoration:none;">{{ it.datatype.uri }}</a>{% endif -%}
+            </div>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
+{%- endmacro -%}
+
+{%- macro render_repos(repos) -%}
+  {%- if not repos -%}—
+  {%- else -%}
+    <ul style="list-style-type: disc; padding-left:22px; margin:6px 0 0 0;">
+      {%- for r in repos -%}
+        {%- if r is string -%}
+          <li><a href="{{ r }}" style="color:#2563eb; text-decoration:none;">{{ r }}</a></li>
+        {%- elif r.url -%}
+          <li>
+            <a href="{{ r.url }}" style="color:#2563eb; text-decoration:none;">{{ r.url }}</a>
+            {%- if r.kind %} <span style="font-size:12px; color:#374151;">({{ r.kind }})</span>{% endif -%}
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
+{%- endmacro -%}
+
+{%- macro render_panel(x, badge) -%}
+  {%- set d = x.data if x.data is mapping else x -%}
+  <section style="position:relative; background:#ffffff; border:1px solid #e5e7eb; border-radius:14px; padding:20px; box-shadow:0 1px 2px rgba(0,0,0,0.04);">
+    <div style="position:absolute; top:-14px; left:-14px; height:40px; width:40px; border-radius:9999px; background:#111827; color:#ffffff; display:grid; place-items:center; font-weight:600;">
+      {{ badge }}
+    </div>
+
+    <ul style="list-style-type: disc; padding-left:22px; margin:0;">
+      <li><span style="font-weight:600;">Name:</span> {{ d.name or '—' }}</li>
+
+      {# source: could be list under data.source or root.source #}
+      {%- set srcs = d.source or x.source -%}
+      <li><span style="font-weight:600;">Source:</span> {{ nl_join(srcs) }}</li>
+
+      {%- if d.version -%}
+        <li><span style="font-weight:600;">Version:</span> {{ nl_join(d.version) }}</li>
+      {%- endif -%}
+
+      {%- if d.label -%}
+        <li><span style="font-weight:600;">Labels:</span> {{ nl_join(d.label) }}</li>
+      {%- endif -%}
+
+      {%- if d.webpage -%}
+        <li>
+          <span style="font-weight:600;">Web:</span>
+          <ul style="list-style-type: disc; padding-left:22px; margin:6px 0 0 0;">
+            {{ render_links(d.webpage) }}
+          </ul>
+        </li>
+      {%- endif -%}
+
+      {%- if d.repository -%}
+        <li>
+          <span style="font-weight:600;">Repository:</span>
+          {{ render_repos(d.repository) }}
+        </li>
+      {%- endif -%}
+
+      {%- if d.download -%}
+        <li>
+          <span style="font-weight:600;">Download:</span>
+          <ul style="list-style-type: disc; padding-left:22px; margin:6px 0 0 0;">
+            {{ render_links(d.download) }}
+          </ul>
+        </li>
+      {%- endif -%}
+
+      {%- if d.documentation -%}
+        <li>
+          <span style="font-weight:600;">Documentation:</span>
+          {{ render_docs(d.documentation) }}
+        </li>
+      {%- endif -%}
+
+      {%- if d.authors -%}
+        <li><span style="font-weight:600;">Authors:</span> {{ render_authors(d.authors) }}</li>
+      {%- endif -%}
+
+      {%- if d.languages -%}
+        <li><span style="font-weight:600;">Languages:</span> {{ nl_join(d.languages) }}</li>
+      {%- endif -%}
+
+      {%- if d.operating_system -%}
+        <li><span style="font-weight:600;">OS:</span> {{ nl_join(d.operating_system) }}</li>
+      {%- endif -%}
+
+      {%- if d.license -%}
+        <li>
+          <span style="font-weight:600;">License:</span>
+          <ul style="list-style-type: disc; padding-left:22px; margin:6px 0 0 0;">
+            {%- for lic in d.license -%}
+              <li>
+                {{ lic.name or '—' }}
+                {%- if lic.url %} — <a href="{{ lic.url }}" style="color:#2563eb; text-decoration:none;">{{ lic.url }}</a>{% endif -%}
+              </li>
+            {%- endfor -%}
+          </ul>
+        </li>
+      {%- endif -%}
+
+      {%- if d.input -%}
+        <li><span style="font-weight:600;">Input:</span> {{ render_io(d.input) }}</li>
+      {%- endif -%}
+
+      {%- if d.output -%}
+        <li><span style="font-weight:600;">Output:</span> {{ render_io(d.output) }}</li>
+      {%- endif -%}
+
+      {%- set desc = (d.description[0] if d.description is sequence else d.description) -%}
+      {%- if desc -%}
+        <li>
+          <span style="font-weight:600;">Description:</span>
+          <ul style="list-style-type: disc; padding-left:22px; margin:6px 0 0 0;">
+            <li>{{ desc }}</li>
+          </ul>
+        </li>
+      {%- endif -%}
+    </ul>
+  </section>
+{%- endmacro -%}
+
+<div style="max-width:1100px; margin:0 auto; padding:16px; font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial; color:#111827; line-height:1.5;">
+  <!-- Responsive 1–2 column grid without external CSS -->
+  <div id="pair-grid" style="display:grid; grid-template-columns:1fr; gap:16px;">
+    {{ render_panel(a, 'A') }}
+    {{ render_panel(b, 'B') }}
+  </div>
+
+  <!-- Optional small inline script to switch to 2 columns ≥900px -->
+  <script>
+    (function () {
+      var grid = document.getElementById('pair-grid');
+      function setCols() {
+        if (window.innerWidth >= 900) {
+          grid.style.gridTemplateColumns = '1fr 1fr';
+        } else {
+          grid.style.gridTemplateColumns = '1fr';
+        }
+      }
+      setCols();
+      window.addEventListener('resize', setCols);
+    })();
+  </script>
+</div>

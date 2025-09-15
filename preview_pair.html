@@ -1,0 +1,152 @@
+<div style="max-width:1100px; margin:0 auto; padding:16px; font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial; color:#111827; line-height:1.5;">
+  <!-- Responsive 1–2 column grid without external CSS -->
+  <div id="pair-grid" style="display:grid; grid-template-columns:1fr; gap:16px;">
+    <section style="position:relative; background:#ffffff; border:1px solid #e5e7eb; border-radius:14px; padding:20px; box-shadow:0 1px 2px rgba(0,0,0,0.04);">
+    <div style="position:absolute; top:-14px; left:-14px; height:40px; width:40px; border-radius:9999px; background:#111827; color:#ffffff; display:grid; place-items:center; font-weight:600;">
+      A
+    </div>
+
+    <ul style="list-style-type: disc; padding-left:22px; margin:0;">
+      <li><span style="font-weight:600;">Name:</span> trimal</li>
+
+      <li><span style="font-weight:600;">Source:</span> biotools, galaxy_metadata, toolshed, bioconda_recipes</li><li><span style="font-weight:600;">Version:</span> 1.4, 0.1.0, 2.0-RC, 1.4.1</li><li><span style="font-weight:600;">Labels:</span> trimal, trimAl: a tool for automated alignment trimming, trimAl</li><li>
+          <span style="font-weight:600;">Web:</span>
+          <ul style="list-style-type: disc; padding-left:22px; margin:6px 0 0 0;">
+            <li><a href="http://trimal.cgenomics.org/" style="color:#2563eb; text-decoration:none;">http://trimal.cgenomics.org/</a></li><li><a href="https://trimal.readthedocs.io/" style="color:#2563eb; text-decoration:none;">https://trimal.readthedocs.io/</a></li>
+          </ul>
+        </li><li>
+          <span style="font-weight:600;">Repository:</span>
+          <ul style="list-style-type: disc; padding-left:22px; margin:6px 0 0 0;"><li>
+            <a href="https://github.com/scapella/trimal" style="color:#2563eb; text-decoration:none;">https://github.com/scapella/trimal</a> <span style="font-size:12px; color:#374151;">(github)</span></li><li>
+            <a href="https://github.com/inab/trimal" style="color:#2563eb; text-decoration:none;">https://github.com/inab/trimal</a> <span style="font-size:12px; color:#374151;">(github)</span></li></ul>
+        </li><li>
+          <span style="font-weight:600;">Download:</span>
+          <ul style="list-style-type: disc; padding-left:22px; margin:6px 0 0 0;">
+            <li><a href="https://github.com/scapella/trimal/archive/v1.4.1.tar.gz" style="color:#2563eb; text-decoration:none;">https://github.com/scapella/trimal/archive/v1.4.1.tar.gz</a></li>
+          </ul>
+        </li><li>
+          <span style="font-weight:600;">Documentation:</span>
+          <ul style="list-style-type: disc; padding-left:22px; margin:6px 0 0 0;"><li><span style="font-weight:600;">
+                Installation Instructions
+              </span>:
+              <a href="https://bioconda.github.io/recipes/trimal/README.html" style="color:#2563eb; text-decoration:none;">
+                https://bioconda.github.io/recipes/trimal/README.html
+              </a></li><li><span style="font-weight:600;">
+                General
+              </span>:
+              <a href="https://bioconda.github.io/recipes/trimal/README.html" style="color:#2563eb; text-decoration:none;">
+                https://bioconda.github.io/recipes/trimal/README.html
+              </a></li><li><span style="font-weight:600;">
+                General
+              </span>:
+              <a href="https://trimal.readthedocs.io/" style="color:#2563eb; text-decoration:none;">
+                https://trimal.readthedocs.io/
+              </a></li><li><span style="font-weight:600;">Help</span>:
+Modes
+    -nogaps                  Remove all positions with gaps in the alignment.
+    -noallgaps               Remove columns composed only by gaps.
+    -gappyout                Use automatic selection on &#34;gappyout&#34; mode. This method only uses information based on gaps&#39; distribution. (see User Guide).
+    -strict                  Use automatic selection on &#34;strict&#34; mode. (see User Guide).
+    -strictplus              Use automatic selection on &#34;strictplus&#34; mode. (see User Guide).
+    -automated1              Use an heuristic method to decide which is the best automated method for a given MSA.
+    trimAl v1.4.rev15 build[2013-12-17]. 2009-2013. Salvador Capella-Gutierrez and Toni Gabaldón.
+
+Custom mode parameters
+    -gt -gapthreshold &lt;n&gt;    1 - (fraction of sequences with a gap allowed).
+    -st -simthreshold &lt;n&gt;    Minimum average similarity allowed.
+    -cons &lt;n&gt;                Minimum percentage of the positions in the original alignment to conserve.
+
+Output formats
+    -nbrf                    Output file in NBRF/PIR format
+    -mega                    Output file in MEGA format
+    -nexus                   Output file in NEXUS format
+    -clustal                 Output file in CLUSTAL format
+    -fasta                   Output file in FASTA format
+    -fasta_m10               Output file in FASTA format. Sequences name length up to 10 characters.
+    -phylip                  Output file in PHYLIP/PHYLIP4 format
+    -phylip_m10              Output file in PHYLIP/PHYLIP4 format. Sequences name length up to 10 characters.
+    -phylip_paml             Output file in PHYLIP format compatible with PAML
+    -phylip_paml_m10         Output file in PHYLIP format compatible with PAML. Sequences name length up to 10 characters.
+    -phylip3.2               Output file in PHYLIP3.2 format
+    -phylip3.2_m10           Output file in PHYLIP3.2 format. Sequences name length up to 10 characters.
+    
+trimAl webpage: http://trimal.cgenomics.org
+
+This program is free software: you can redistribute it and/or modify 
+it under the terms of the GNU General Public License as published by 
+the Free Software Foundation, the last available version.
+
+Please cite:
+    trimAl: a tool for automated alignment trimming in large-scale phylogenetic analyses.
+    Salvador Capella-Gutierrez; Jose M. Silla-Martinez; Toni Gabaldon.
+    Bioinformatics 2009, 25:1972-1973.
+    
+          </li></ul>
+        </li><li><span style="font-weight:600;">Authors:</span> <ul style="list-style-type: disc; padding-left:22px; margin:6px 0 0 0;"><li>
+          Salvador Capella-Gutierrez (Person, salcagu@gmail.com)
+        </li><li>
+          Unknown (Person, tgabaldon@crg.es)
+        </li></ul></li><li><span style="font-weight:600;">OS:</span> Windows, macOS, Linux</li><li>
+          <span style="font-weight:600;">License:</span>
+          <ul style="list-style-type: disc; padding-left:22px; margin:6px 0 0 0;"><li>
+                GPL-3.0-or-later — <a href="https://spdx.org/licenses/GPL-3.0-or-later.html" style="color:#2563eb; text-decoration:none;">https://spdx.org/licenses/GPL-3.0-or-later.html</a></li></ul>
+        </li><li><span style="font-weight:600;">Input:</span> <ul style="list-style-type: disc; padding-left:22px; margin:6px 0 0 0;"><li><div style="margin-top:2px; font-size:12px; color:#374151;">
+              Datatype: Sequence alignment — <a href="http://edamontology.org/data_0863" style="color:#2563eb; text-decoration:none;">http://edamontology.org/data_0863</a></div></li></ul></li><li><span style="font-weight:600;">Output:</span> <ul style="list-style-type: disc; padding-left:22px; margin:6px 0 0 0;"><li><span style="font-weight:600;">ClustalW format</span> (EDAM) — <a href="http://edamontology.org/format_1982" style="color:#2563eb; text-decoration:none;">http://edamontology.org/format_1982</a><div style="margin-top:2px; font-size:12px; color:#374151;">
+              Datatype: Alignment — <a href="http://edamontology.org/data_1916" style="color:#2563eb; text-decoration:none;">http://edamontology.org/data_1916</a></div></li><li><span style="font-weight:600;">PHYLIP format</span> (EDAM) — <a href="http://edamontology.org/format_1997" style="color:#2563eb; text-decoration:none;">http://edamontology.org/format_1997</a><div style="margin-top:2px; font-size:12px; color:#374151;">
+              Datatype: Alignment — <a href="http://edamontology.org/data_1916" style="color:#2563eb; text-decoration:none;">http://edamontology.org/data_1916</a></div></li><li><span style="font-weight:600;">PHYLIP sequential</span> (EDAM) — <a href="http://edamontology.org/format_1998" style="color:#2563eb; text-decoration:none;">http://edamontology.org/format_1998</a><div style="margin-top:2px; font-size:12px; color:#374151;">
+              Datatype: Alignment — <a href="http://edamontology.org/data_1916" style="color:#2563eb; text-decoration:none;">http://edamontology.org/data_1916</a></div></li><li><span style="font-weight:600;">FASTA</span> (EDAM) — <a href="http://edamontology.org/format_1929" style="color:#2563eb; text-decoration:none;">http://edamontology.org/format_1929</a><div style="margin-top:2px; font-size:12px; color:#374151;">
+              Datatype: Alignment — <a href="http://edamontology.org/data_1916" style="color:#2563eb; text-decoration:none;">http://edamontology.org/data_1916</a></div></li><li><span style="font-weight:600;">Textual format</span> (EDAM) — <a href="http://edamontology.org/format_2330" style="color:#2563eb; text-decoration:none;">http://edamontology.org/format_2330</a><div style="margin-top:2px; font-size:12px; color:#374151;">
+              Datatype: Report — <a href="http://edamontology.org/data_2048" style="color:#2563eb; text-decoration:none;">http://edamontology.org/data_2048</a></div></li></ul></li><li>
+          <span style="font-weight:600;">Description:</span>
+          <ul style="list-style-type: disc; padding-left:22px; margin:6px 0 0 0;">
+            <li>A tool for the automated removal of spurious sequences or poorly aligned regions from a multiple sequence alignment.</li>
+          </ul>
+        </li></ul>
+  </section>
+    <section style="position:relative; background:#ffffff; border:1px solid #e5e7eb; border-radius:14px; padding:20px; box-shadow:0 1px 2px rgba(0,0,0,0.04);">
+    <div style="position:absolute; top:-14px; left:-14px; height:40px; width:40px; border-radius:9999px; background:#111827; color:#ffffff; display:grid; place-items:center; font-weight:600;">
+      B
+    </div>
+
+    <ul style="list-style-type: disc; padding-left:22px; margin:0;">
+      <li><span style="font-weight:600;">Name:</span> trimal</li>
+
+      <li><span style="font-weight:600;">Source:</span> sourceforge</li><li><span style="font-weight:600;">Labels:</span> trimal</li><li>
+          <span style="font-weight:600;">Web:</span>
+          <ul style="list-style-type: disc; padding-left:22px; margin:6px 0 0 0;">
+            <li><a href="https://trimal.sourceforge.io/" style="color:#2563eb; text-decoration:none;">https://trimal.sourceforge.io/</a></li>
+          </ul>
+        </li><li>
+          <span style="font-weight:600;">Repository:</span>
+          <ul style="list-style-type: disc; padding-left:22px; margin:6px 0 0 0;"><li>
+            <a href="https://sourceforge.net/projects/trimal" style="color:#2563eb; text-decoration:none;">https://sourceforge.net/projects/trimal</a> <span style="font-size:12px; color:#374151;">(sourceforge)</span></li></ul>
+        </li><li>
+          <span style="font-weight:600;">Download:</span>
+          <ul style="list-style-type: disc; padding-left:22px; margin:6px 0 0 0;">
+            <li><a href="https://sourceforge.net/projects/trimal" style="color:#2563eb; text-decoration:none;">https://sourceforge.net/projects/trimal</a></li>
+          </ul>
+        </li><li><span style="font-weight:600;">OS:</span> Linux, Windows</li><li>
+          <span style="font-weight:600;">Description:</span>
+          <ul style="list-style-type: disc; padding-left:22px; margin:6px 0 0 0;">
+            <li>TrimAl is a bioinformatic tool that cleans multiple protein or nucleotide sequence alignment. The clean alignment (as a result of the TrimAl cleaning process) is used for phylogenetic reconstruction. TrimAl improves the quality of the reconstructed trees.</li>
+          </ul>
+        </li></ul>
+  </section>
+  </div>
+
+  <!-- Optional small inline script to switch to 2 columns ≥900px -->
+  <script>
+    (function () {
+      var grid = document.getElementById('pair-grid');
+      function setCols() {
+        if (window.innerWidth >= 900) {
+          grid.style.gridTemplateColumns = '1fr 1fr';
+        } else {
+          grid.style.gridTemplateColumns = '1fr';
+        }
+      }
+      setCols();
+      window.addEventListener('resize', setCols);
+    })();
+  </script>
+</div>

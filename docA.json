@@ -1,0 +1,227 @@
+{
+  "_id": {
+    "$oid": "68ae0c7b07c9749081c470b2"
+  },
+  "source": [
+    "galaxy_metadata/trimal/cmd/0.1.0",
+    "bioconda_recipes/trimal/cmd/1.4.1",
+    "biotools/trimal/cmd/1.4",
+    "biotools/trimal/cmd/2.0-RC",
+    "toolshed/trimal/cmd/0.1.0"
+  ],
+  "timestamp": "2025-08-26T21:35:23.723822",
+  "data": {
+    "name": "trimal",
+    "type": [
+      "cmd"
+    ],
+    "version": [
+      "1.4",
+      "0.1.0",
+      "2.0-RC",
+      "1.4.1"
+    ],
+    "label": [
+      "trimal",
+      "trimAl: a tool for automated alignment trimming",
+      "trimAl"
+    ],
+    "links": [],
+    "webpage": [
+      "http://trimal.cgenomics.org/",
+      "https://trimal.readthedocs.io/"
+    ],
+    "download": [
+      "https://github.com/scapella/trimal/archive/v1.4.1.tar.gz"
+    ],
+    "repository": [
+      {
+        "url": "https://github.com/scapella/trimal",
+        "kind": "github",
+        "source_hasAnonymousAccess": null,
+        "source_isDownloadRegistered": null,
+        "source_isFree": null,
+        "source_isRepoAccessible": null
+      },
+      {
+        "url": "https://github.com/inab/trimal",
+        "kind": "github",
+        "source_hasAnonymousAccess": null,
+        "source_isDownloadRegistered": null,
+        "source_isFree": null,
+        "source_isRepoAccessible": null
+      }
+    ],
+    "operating_system": [
+      "Windows",
+      "macOS",
+      "Linux"
+    ],
+    "source_code": [
+      "https://github.com/scapella/trimal/archive/v1.4.1.tar.gz"
+    ],
+    "https": false,
+    "ssl": false,
+    "operational": false,
+    "bioschemas": false,
+    "source": [
+      "biotools",
+      "galaxy_metadata",
+      "toolshed",
+      "bioconda_recipes"
+    ],
+    "edam_topics": [],
+    "edam_operations": [],
+    "description": [
+      "A tool for the automated removal of spurious sequences or poorly aligned regions from a multiple sequence alignment.",
+      "Tool for the automated removal of spurious sequences or poorly aligned regions from a multiple sequence alignment."
+    ],
+    "test": false,
+    "inst_instr": false,
+    "dependencies": [],
+    "contribution_policy": false,
+    "tags": [],
+    "input": [
+      {
+        "vocabulary": "",
+        "term": "",
+        "uri": null,
+        "datatype": {
+          "vocabulary": "EDAM",
+          "term": "Sequence alignment",
+          "uri": "http://edamontology.org/data_0863"
+        }
+      }
+    ],
+    "output": [
+      {
+        "vocabulary": "EDAM",
+        "term": "ClustalW format",
+        "uri": "http://edamontology.org/format_1982",
+        "datatype": {
+          "vocabulary": "EDAM",
+          "term": "Alignment",
+          "uri": "http://edamontology.org/data_1916"
+        }
+      },
+      {
+        "vocabulary": "EDAM",
+        "term": "PHYLIP format",
+        "uri": "http://edamontology.org/format_1997",
+        "datatype": {
+          "vocabulary": "EDAM",
+          "term": "Alignment",
+          "uri": "http://edamontology.org/data_1916"
+        }
+      },
+      {
+        "vocabulary": "EDAM",
+        "term": "PHYLIP sequential",
+        "uri": "http://edamontology.org/format_1998",
+        "datatype": {
+          "vocabulary": "EDAM",
+          "term": "Alignment",
+          "uri": "http://edamontology.org/data_1916"
+        }
+      },
+      {
+        "vocabulary": "EDAM",
+        "term": "FASTA",
+        "uri": "http://edamontology.org/format_1929",
+        "datatype": {
+          "vocabulary": "EDAM",
+          "term": "Alignment",
+          "uri": "http://edamontology.org/data_1916"
+        }
+      },
+      {
+        "vocabulary": "EDAM",
+        "term": "Textual format",
+        "uri": "http://edamontology.org/format_2330",
+        "datatype": {
+          "vocabulary": "EDAM",
+          "term": "Report",
+          "uri": "http://edamontology.org/data_2048"
+        }
+      }
+    ],
+    "documentation": [
+      {
+        "type": "installation_instructions",
+        "url": "https://bioconda.github.io/recipes/trimal/README.html",
+        "content": null
+      },
+      {
+        "type": "general",
+        "url": "https://bioconda.github.io/recipes/trimal/README.html",
+        "content": null
+      },
+      {
+        "type": "general",
+        "url": "https://trimal.readthedocs.io/",
+        "content": null
+      },
+      {
+        "type": "help",
+        "url": null,
+        "content": "\nModes\n    -nogaps                  Remove all positions with gaps in the alignment.\n    -noallgaps               Remove columns composed only by gaps.\n    -gappyout                Use automatic selection on \"gappyout\" mode. This method only uses information based on gaps' distribution. (see User Guide).\n    -strict                  Use automatic selection on \"strict\" mode. (see User Guide).\n    -strictplus              Use automatic selection on \"strictplus\" mode. (see User Guide).\n    -automated1              Use an heuristic method to decide which is the best automated method for a given MSA.\n    trimAl v1.4.rev15 build[2013-12-17]. 2009-2013. Salvador Capella-Gutierrez and Toni Gabaldón.\n\nCustom mode parameters\n    -gt -gapthreshold <n>    1 - (fraction of sequences with a gap allowed).\n    -st -simthreshold <n>    Minimum average similarity allowed.\n    -cons <n>                Minimum percentage of the positions in the original alignment to conserve.\n\nOutput formats\n    -nbrf                    Output file in NBRF/PIR format\n    -mega                    Output file in MEGA format\n    -nexus                   Output file in NEXUS format\n    -clustal                 Output file in CLUSTAL format\n    -fasta                   Output file in FASTA format\n    -fasta_m10               Output file in FASTA format. Sequences name length up to 10 characters.\n    -phylip                  Output file in PHYLIP/PHYLIP4 format\n    -phylip_m10              Output file in PHYLIP/PHYLIP4 format. Sequences name length up to 10 characters.\n    -phylip_paml             Output file in PHYLIP format compatible with PAML\n    -phylip_paml_m10         Output file in PHYLIP format compatible with PAML. Sequences name length up to 10 characters.\n    -phylip3.2               Output file in PHYLIP3.2 format\n    -phylip3.2_m10           Output file in PHYLIP3.2 format. Sequences name length up to 10 characters.\n    \ntrimAl webpage: http://trimal.cgenomics.org\n\nThis program is free software: you can redistribute it and/or modify \nit under the terms of the GNU General Public License as published by \nthe Free Software Foundation, the last available version.\n\nPlease cite:\n    trimAl: a tool for automated alignment trimming in large-scale phylogenetic analyses.\n    Salvador Capella-Gutierrez; Jose M. Silla-Martinez; Toni Gabaldon.\n    Bioinformatics 2009, 25:1972-1973.\n    "
+      }
+    ],
+    "license": [
+      {
+        "name": "GPL-3.0-or-later",
+        "url": "https://spdx.org/licenses/GPL-3.0-or-later.html"
+      }
+    ],
+    "termsUse": false,
+    "authors": [
+      {
+        "type": "Person",
+        "name": "Salvador Capella-Gutierrez",
+        "email": "salcagu@gmail.com",
+        "maintainer": false,
+        "url": null,
+        "orcid": null
+      },
+      {
+        "type": "Person",
+        "name": null,
+        "email": "tgabaldon@crg.es",
+        "maintainer": false,
+        "url": "http://gabaldonlab.crg.es/",
+        "orcid": null
+      }
+    ],
+    "topics": [
+      {
+        "vocabulary": "EDAM",
+        "term": "Sequence analysis",
+        "uri": "http://edamontology.org/topic_0080"
+      },
+      {
+        "vocabulary": "EDAM",
+        "term": "Sequencing",
+        "uri": "http://edamontology.org/topic_3168"
+      },
+      {
+        "vocabulary": "EDAM",
+        "term": "\"Sequence sites",
+        "uri": "http://edamontology.org/topic_0160"
+      }
+    ],
+    "operations": [
+      {
+        "vocabulary": "EDAM",
+        "term": "Multiple sequence alignment",
+        "uri": "http://edamontology.org/operation_0492"
+      }
+    ],
+    "sources_labels": {},
+    "publication": [
+      "67c82af410e2f3aa0b3b91bf"
+    ],
+    "languages": [],
+    "citation": [],
+    "other_names": []
+  }
+}
