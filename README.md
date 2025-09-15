@@ -6,19 +6,19 @@ The goal is to help human annotators decide whether two records refer to the sam
 
 
 ## What it currently does
-•	Takes two JSON “tool docs” shaped like the metadata in our pipeline.
-•	Uses a Jinja2 template (pair_panels.html.j2) to render each doc into a clean HTML panel (“A” and “B”).
-•	Adds inline styles so the HTML renders reliably inside Label Studio.
-•	Supports common fields: name, source, version, labels, repository, webpage, download, documentation, authors, license, description, input, output, etc.
-•	Handles missing/optional fields gracefully.
-•	Includes a helper (assignment.py) to assign 3 annotators per pair and generate a balanced set of Label Studio tasks.
+- Takes two JSON “tool docs” shaped like the metadata in our pipeline.
+- Uses a Jinja2 template (pair_panels.html.j2) to render each doc into a clean HTML panel (“A” and “B”).
+- Adds inline styles so the HTML renders reliably inside Label Studio.
+- Supports common fields: name, source, version, labels, repository, webpage, download, documentation, authors, license, description, input, output, etc.
+- Handles missing/optional fields gracefully.
+- Includes a helper (assignment.py) to assign 3 annotators per pair and generate a balanced set of Label Studio tasks.
 
 ## How to render a single pair
 1.	Place your two JSON docs on disk, e.g. docA.json and docB.json.
 2.	Run the renderer script:
-```python
-python render_pair.py docA.json docB.json
-```
+    ```python
+    python render_pair.py docA.json docB.json
+    ```
 
 This will output the combined HTML to preview_pair.html.
 
@@ -27,15 +27,16 @@ This will output the combined HTML to preview_pair.html.
 If you have a list of pairs and want each pair annotated by 3 different annotators (balanced across all annotators):
 1.	Edit assignment.py to list your pairs and annotators.
 2.	Run:
-```python
-python assignment.py
-```
+    ```python
+    python assignment.py
+    ```
 
 3.	This produces a tasks.json file in JSON array format, which Label Studio accepts.
 Each task includes:
-•	the rendered HTML (`data.html`)
-•	the pair_id
-•	the assigned annotator
+- the rendered HTML (`data.html`)
+- the pair_id
+- the assigned annotator
+
 Example task: 
 
 ```json
