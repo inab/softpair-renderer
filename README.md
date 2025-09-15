@@ -33,27 +33,27 @@ If you have a list of pairs and want each pair annotated by 3 different annotato
 
 3.	This produces a tasks.json file in JSON array format, which Label Studio accepts.
 Each task includes:
-- the rendered HTML (`data.html`)
-- the pair_id
-- the assigned annotator
+  - the rendered HTML (`data.html`)
+  - the pair_id
+  - the assigned annotator
 
-Example task: 
+    Example task: 
 
-```json
-{
-  "id": "a0e7f8b9-1234-5678-9012-abcdef123456",
-  "data": {
-    "pair_id": "pair-001",
-    "annotator": "Captain Curator",
-    "html": "<div>…rendered HTML…</div>"
-  }
-}
-```
+    ```json
+    {
+    "id": "a0e7f8b9-1234-5678-9012-abcdef123456",
+    "data": {
+        "pair_id": "pair-001",
+        "annotator": "Captain Curator",
+        "html": "<div>…rendered HTML…</div>"
+    }
+    }
+    ```
 
 
 ## Using in Label Studio
 1.	In your project, set the labeling interface config to something like the content of labelstudio_config.html.
 2.	Import tasks.json from assignment.py (not the raw HTML).
 3.	Annotators will see two panels (A and B) and answer whether they are the same software.
-![Label interface of Label Studio](image-1.png)
+    ![Label interface of Label Studio](image-1.png)
 
