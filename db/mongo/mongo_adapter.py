@@ -11,7 +11,7 @@ import logging
 from typing import Dict, Optional
 from pymongo.errors import NetworkTimeout, AutoReconnect, CursorNotFound
 from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
-from src.infrastructure.db.mongo.database_adapter import DatabaseAdapter
+from db.mongo.database_adapter import DatabaseAdapter
 #from sshtunnel import SSHTunnelForwarder
 
 

@@ -1,5 +1,5 @@
-from src.infrastructure.db.mongo.mongo_adapter import MongoDBAdapter
-from src.infrastructure.db.mongo.publications_repository import PublicationsMetadataRepository
+from db.mongo.mongo_adapter import MongoDBAdapter
+from db.mongo.publications_repository import PublicationsMetadataRepository
 
 
 # This ensures only one instance exists in your application

@@ -1,5 +1,5 @@
 # This adapter translates DB logic into domain logic 
-from src.infrastructure.db.mongo.mongo_adapter import MongoDBAdapter
+from db.mongo.mongo_adapter import MongoDBAdapter
 
 class PublicationsMetadataRepository:
     def __init__(self, db_adapter: MongoDBAdapter):

@@ -1,6 +1,6 @@
 # Raw software repository# This adapter translates DB logic into domain logic from src.infrastructure.mongo_adapter import MongoDBAdapter
 
-from src.infrastructure.db.mongo.mongo_adapter import MongoDBAdapter
+from db.mongo.mongo_adapter import MongoDBAdapter
 from typing import Dict, Any
 
 class RawSoftwareMetadataRepository:

@@ -53,13 +53,6 @@
               </a>
             {%- endif -%}
           </li>
-        {%- elif d.content -%}
-          <li>
-            {%- if d.type -%}
-              <span style="font-weight:600;">{{ d.type|replace('_',' ')|title }}</span>:
-            {%- endif -%}
-            {{ d.content }}
-          </li>
         {%- endif -%}
       {%- endfor -%}
     </ul>
@@ -116,14 +109,35 @@
 
       {# source: could be list under data.source or root.source #}
       {%- set srcs = d.source or x.source -%}
-      <li><span style="font-weight:600;">Source:</span> {{ nl_join(srcs) }}</li>
+      <li><span style="font-weight:600;">Sources of record:</span> {{ nl_join(srcs) }}</li>
+
+      {%- set desc = (d.description[0] if d.description is sequence else d.description) -%}
+      {%- if desc -%}
+        <li>
+          <span style="font-weight:600;">Description:</span>
+          <ul style="list-style-type: disc; padding-left:22px; margin:6px 0 0 0;">
+            <li>{{ desc }}</li>
+          </ul>
+        </li>
+      {%- endif -%}
+
 
       {%- if d.version -%}
         <li><span style="font-weight:600;">Version:</span> {{ nl_join(d.version) }}</li>
       {%- endif -%}
 
-      {%- if d.label -%}
-        <li><span style="font-weight:600;">Labels:</span> {{ nl_join(d.label) }}</li>
+      {%- if d.license -%}
+        <li>
+          <span style="font-weight:600;">License:</span>
+          <ul style="list-style-type: disc; padding-left:22px; margin:6px 0 0 0;">
+            {%- for lic in d.license -%}
+              <li>
+                {{ lic.name or '—' }}
+                {%- if lic.url %} — <a href="{{ lic.url }}" style="color:#2563eb; text-decoration:none;">{{ lic.url }}</a>{% endif -%}
+              </li>
+            {%- endfor -%}
+          </ul>
+        </li>
       {%- endif -%}
 
       {%- if d.webpage -%}
@@ -166,24 +180,6 @@
         <li><span style="font-weight:600;">Languages:</span> {{ nl_join(d.languages) }}</li>
       {%- endif -%}
 
-      {%- if d.operating_system -%}
-        <li><span style="font-weight:600;">OS:</span> {{ nl_join(d.operating_system) }}</li>
-      {%- endif -%}
-
-      {%- if d.license -%}
-        <li>
-          <span style="font-weight:600;">License:</span>
-          <ul style="list-style-type: disc; padding-left:22px; margin:6px 0 0 0;">
-            {%- for lic in d.license -%}
-              <li>
-                {{ lic.name or '—' }}
-                {%- if lic.url %} — <a href="{{ lic.url }}" style="color:#2563eb; text-decoration:none;">{{ lic.url }}</a>{% endif -%}
-              </li>
-            {%- endfor -%}
-          </ul>
-        </li>
-      {%- endif -%}
-
       {%- if d.input -%}
         <li><span style="font-weight:600;">Input:</span> {{ render_io(d.input) }}</li>
       {%- endif -%}
@@ -192,15 +188,11 @@
         <li><span style="font-weight:600;">Output:</span> {{ render_io(d.output) }}</li>
       {%- endif -%}
 
-      {%- set desc = (d.description[0] if d.description is sequence else d.description) -%}
-      {%- if desc -%}
-        <li>
-          <span style="font-weight:600;">Description:</span>
-          <ul style="list-style-type: disc; padding-left:22px; margin:6px 0 0 0;">
-            <li>{{ desc }}</li>
-          </ul>
-        </li>
+      {%- if d.label -%}
+        <li><span style="font-weight:600;">Labels:</span> {{ nl_join(d.label) }}</li>
       {%- endif -%}
+
+      
     </ul>
   </section>
 {%- endmacro -%}
@@ -212,12 +204,12 @@
     {{ render_panel(b, 'B') }}
   </div>
 
-  <!-- Optional small inline script to switch to 2 columns ≥900px -->
+  <!-- Optional small inline script to switch to 2 columns ≥800px -->
   <script>
     (function () {
       var grid = document.getElementById('pair-grid');
       function setCols() {
-        if (window.innerWidth >= 900) {
+        if (window.innerWidth >= 800) {
           grid.style.gridTemplateColumns = '1fr 1fr';
         } else {
           grid.style.gridTemplateColumns = '1fr';

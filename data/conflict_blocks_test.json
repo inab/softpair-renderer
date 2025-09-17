@@ -1,0 +1,461 @@
+{
+    "apoc/cmd": {
+        "remaining": [
+            {
+                "name": "apoc",
+                "types": "cmd",
+                "source": [
+                    "galaxy_metadata"
+                ],
+                "description": "",
+                "repository": [],
+                "webpage": [],
+                "id": "galaxy_metadata/apoc/cmd/1.0+galaxy1"
+            },
+            {
+                "name": "apoc",
+                "types": "cmd",
+                "source": [
+                    "galaxy_metadata"
+                ],
+                "description": "",
+                "repository": [],
+                "webpage": [],
+                "id": "galaxy_metadata/apoc/cmd/1.0"
+            },
+            {
+                "name": "apoc",
+                "types": "cmd",
+                "source": [
+                    "toolshed"
+                ],
+                "description": "Large-scale identification of similar protein pockets.",
+                "repository": [],
+                "webpage": [],
+                "id": "toolshed/apoc/cmd/1.0+galaxy1"
+            },
+            {
+                "name": "apoc",
+                "types": "cmd",
+                "source": [
+                    "toolshed"
+                ],
+                "description": "Large-scale identification of similar protein pockets.",
+                "repository": [],
+                "webpage": [],
+                "id": "toolshed/apoc/cmd/1.0"
+            }
+        ],
+        "disconnected": [
+            {
+                "name": "apoc",
+                "types": "cmd",
+                "source": [
+                    "bioconda_recipes"
+                ],
+                "description": "Large-scale structural comparison of protein pockets.",
+                "repository": [],
+                "webpage": [
+                    "cssb.biology.gatech.edu/APoc"
+                ],
+                "id": "bioconda_recipes/apoc/cmd/1b16"
+            }
+        ]
+    },
+    "allegro/cmd": {
+        "remaining": [
+            {
+                "name": "allegro",
+                "types": "cmd",
+                "source": [
+                    "galaxy_metadata"
+                ],
+                "description": "",
+                "repository": [],
+                "webpage": [],
+                "id": "galaxy_metadata/allegro/cmd/2.0"
+            },
+            {
+                "name": "allegro",
+                "types": "cmd",
+                "source": [
+                    "toolshed"
+                ],
+                "description": "Linkage and Haplotype analysis.",
+                "repository": [],
+                "webpage": [],
+                "id": "toolshed/allegro/cmd/2.0"
+            }
+        ],
+        "disconnected": [
+            {
+                "name": "allegro",
+                "types": "cmd",
+                "source": [
+                    "bioconda_recipes"
+                ],
+                "description": "A fast linkage and haplotype analysis utility making use of MTBDD to reduce complexity.",
+                "repository": [
+                    "github.com/BioTools-Tek/packages"
+                ],
+                "webpage": [
+                    "www.nature.com/ng/journal/v37/n10/full/ng1005-1015"
+                ],
+                "id": "bioconda_recipes/allegro/cmd/3"
+            }
+        ]
+    },
+    "rfplasmid/cmd": {
+        "remaining": [
+            {
+                "name": "rfplasmid",
+                "types": "cmd",
+                "source": [
+                    "bioconda_recipes"
+                ],
+                "description": "RFPlasmid predicts plasmid contigs from assemblies using single copy marker genes, plasmid genes, and kmers.",
+                "repository": [
+                    "github.com/aldertzomer/RFPlasmid"
+                ],
+                "webpage": [
+                    "github.com/aldertzomer/RFPlasmid"
+                ],
+                "id": "bioconda_recipes/rfplasmid/cmd/0.0.18"
+            },
+            {
+                "name": "RFPlasmid",
+                "types": null,
+                "source": [
+                    "github"
+                ],
+                "description": "Predicting plasmid contigs from assemblies using single copy marker genes, plasmid genes, kmers - Developed by Linda van der Graaf.",
+                "repository": [
+                    "github.com/aldertzomer/RFPlasmid"
+                ],
+                "webpage": [],
+                "id": "github/RFPlasmid/None/1.0"
+            }
+        ],
+        "disconnected": [
+            {
+                "name": "rfplasmid",
+                "types": "undefined",
+                "source": [
+                    "biotools"
+                ],
+                "description": "Predicting plasmid sequences from short read assembly data using machine learning.\n\nPredicting plasmid contigs from assemblies using single copy marker genes, plasmid genes, kmers.\n\nRFPlasmid comes with an option to train your own model if you provide it with contigs of chromosomes and plasmids.",
+                "repository": [],
+                "webpage": [
+                    "klif.uu.nl/rfplasmid"
+                ],
+                "id": "biotools/rfplasmid/undefined/None"
+            }
+        ]
+    },
+    "express/cmd": {
+        "remaining": [
+            {
+                "name": "express",
+                "types": "cmd",
+                "source": [
+                    "galaxy_metadata"
+                ],
+                "description": "",
+                "repository": [],
+                "webpage": [],
+                "id": "galaxy_metadata/express/cmd/1.1.1"
+            },
+            {
+                "name": "express",
+                "types": "cmd",
+                "source": [
+                    "toolshed"
+                ],
+                "description": "Quantify the abundances of a set of target sequences from sampled subsequences.",
+                "repository": [],
+                "webpage": [],
+                "id": "toolshed/express/cmd/1.1.1"
+            },
+            {
+                "name": "express",
+                "types": "cmd",
+                "source": [
+                    "galaxy"
+                ],
+                "description": "Quantify the abundances of a set of target sequences from sampled subsequences.",
+                "repository": [],
+                "webpage": [
+                    "galaxy.bi.uni-freiburg.de/tool_runner"
+                ],
+                "id": "galaxy/express/cmd/1.1.1"
+            }
+        ],
+        "disconnected": [
+            {
+                "name": "express",
+                "types": "cmd",
+                "source": [
+                    "bioconda_recipes"
+                ],
+                "description": "EXpress is a streaming DNA/RNA sequence quantification tool.",
+                "repository": [],
+                "webpage": [
+                    "bio.math.berkeley.edu/eXpress"
+                ],
+                "id": "bioconda_recipes/express/cmd/1.5.1"
+            },
+            {
+                "name": "express",
+                "types": "cmd",
+                "source": [
+                    "biotools"
+                ],
+                "description": "Streaming tool for quantifying the abundances of a set of target sequences from sampled subsequences. Example applications include transcript-level RNA-Seq quantification, allele-specific/haplotype expression analysis (from RNA-Seq), transcription factor binding quantification in ChIP-Seq, and analysis of metagenomic data. It can be used to resolve ambiguous mappings in other high-throughput sequencing based applications.",
+                "repository": [],
+                "webpage": [
+                    "bio.math.berkeley.edu/eXpress/index"
+                ],
+                "id": "biotools/express/cmd/1.5.1"
+            }
+        ]
+    },
+    "bayescan/cmd": {
+        "remaining": [
+            {
+                "name": "bayescan",
+                "types": "cmd",
+                "source": [
+                    "galaxy_metadata"
+                ],
+                "description": "",
+                "repository": [],
+                "webpage": [],
+                "id": "galaxy_metadata/bayescan/cmd/2.1"
+            },
+            {
+                "name": "bayescan",
+                "types": "cmd",
+                "source": [
+                    "toolshed"
+                ],
+                "description": "Detecting natural selection from population-based genetic data.",
+                "repository": [],
+                "webpage": [],
+                "id": "toolshed/bayescan/cmd/2.1"
+            }
+        ],
+        "disconnected": [
+            {
+                "name": "bayescan",
+                "types": "cmd",
+                "source": [
+                    "bioconda_recipes"
+                ],
+                "description": "Phylogenetics - Randomized Axelerated Maximum Likelihood.",
+                "repository": [],
+                "webpage": [
+                    "cmpg.unibe.ch/software/BayeScan"
+                ],
+                "id": "bioconda_recipes/bayescan/cmd/2.0.1"
+            }
+        ]
+    },
+    "transtermhp/cmd": {
+        "remaining": [
+            {
+                "name": "transtermhp",
+                "types": "cmd",
+                "source": [
+                    "galaxy_metadata"
+                ],
+                "description": "",
+                "repository": [],
+                "webpage": [],
+                "id": "galaxy_metadata/transtermhp/cmd/2.09.1"
+            },
+            {
+                "name": "transtermhp",
+                "types": "cmd",
+                "source": [
+                    "toolshed"
+                ],
+                "description": "Finds rho-independent transcription terminators in bacterial genomes.",
+                "repository": [],
+                "webpage": [],
+                "id": "toolshed/transtermhp/cmd/2.09.1"
+            },
+            {
+                "name": "transtermhp",
+                "types": "cmd",
+                "source": [
+                    "galaxy"
+                ],
+                "description": "Finds rho-independent transcription terminators in bacterial genomes.",
+                "repository": [],
+                "webpage": [
+                    "galaxy.bi.uni-freiburg.de/tool_runner"
+                ],
+                "id": "galaxy/transtermhp/cmd/2.09.1"
+            }
+        ],
+        "disconnected": [
+            {
+                "name": "transtermhp",
+                "types": "cmd",
+                "source": [
+                    "bioconda_recipes"
+                ],
+                "description": "TransTermHP finds rho-independent transcription terminators in bacterial genomes.",
+                "repository": [],
+                "webpage": [
+                    "transterm.cbcb.umd.edu/index.php"
+                ],
+                "id": "bioconda_recipes/transtermhp/cmd/2.09"
+            }
+        ]
+    },
+    "angsd/cmd": {
+        "remaining": [
+            {
+                "name": "angsd",
+                "types": "cmd",
+                "source": [
+                    "biotools"
+                ],
+                "description": "Software for analyzing next generation sequencing data. The software can handle a number of different input types from mapped reads to imputed genotype probabilities. Most methods take genotype uncertainty into account instead of basing the analysis on called genotypes. This is especially useful for low and medium depth data.",
+                "repository": [
+                    "github.com/ANGSD/angsd"
+                ],
+                "webpage": [
+                    "www.popgen.dk/angsd"
+                ],
+                "id": "biotools/angsd/cmd/0.901"
+            },
+            {
+                "name": "angsd",
+                "types": null,
+                "source": [
+                    "github"
+                ],
+                "description": "Program for analysing NGS data.",
+                "repository": [
+                    "github.com/ANGSD/angsd"
+                ],
+                "webpage": [],
+                "id": "github/angsd/None/0.940"
+            }
+        ],
+        "disconnected": [
+            {
+                "name": "angsd",
+                "types": "cmd",
+                "source": [
+                    "bioconda_recipes"
+                ],
+                "description": "ANGSD: Analysis of next generation Sequencing Data.",
+                "repository": [],
+                "webpage": [
+                    "www.popgen.dk/angsd/index.php/ANGSD"
+                ],
+                "id": "bioconda_recipes/angsd/cmd/0.940"
+            }
+        ]
+    },
+    "peakachu/cmd": {
+        "remaining": [
+            {
+                "name": "peakachu",
+                "types": "cmd",
+                "source": [
+                    "galaxy_metadata"
+                ],
+                "description": "",
+                "repository": [],
+                "webpage": [],
+                "id": "galaxy_metadata/peakachu/cmd/0.2.0+galaxy0"
+            },
+            {
+                "name": "peakachu",
+                "types": "cmd",
+                "source": [
+                    "bioconda_recipes"
+                ],
+                "description": "Peak calling tool for CLIP-seq data.",
+                "repository": [
+                    "github.com/tbischler/PEAKachu"
+                ],
+                "webpage": [
+                    "github.com/tbischler/PEAKachu"
+                ],
+                "id": "bioconda_recipes/peakachu/cmd/0.2.0"
+            },
+            {
+                "name": "peakachu",
+                "types": "lib",
+                "source": [
+                    "bioconda_recipes"
+                ],
+                "description": "Peak calling tool for CLIP-seq data.",
+                "repository": [
+                    "github.com/tbischler/PEAKachu"
+                ],
+                "webpage": [
+                    "github.com/tbischler/PEAKachu"
+                ],
+                "id": "bioconda_recipes/peakachu/lib/0.2.0"
+            },
+            {
+                "name": "peakachu",
+                "types": "cmd",
+                "source": [
+                    "toolshed"
+                ],
+                "description": "Calls Peaks in CLIP data.",
+                "repository": [],
+                "webpage": [],
+                "id": "toolshed/peakachu/cmd/0.2.0+galaxy0"
+            },
+            {
+                "name": "PEAKachu",
+                "types": null,
+                "source": [
+                    "github"
+                ],
+                "description": "Peak calling tool for CLIP-seq data.",
+                "repository": [
+                    "github.com/tbischler/PEAKachu"
+                ],
+                "webpage": [],
+                "id": "github/PEAKachu/None/v0.2.0"
+            },
+            {
+                "name": "peakachu",
+                "types": "cmd",
+                "source": [
+                    "galaxy"
+                ],
+                "description": "Calls Peaks in CLIP data.",
+                "repository": [],
+                "webpage": [
+                    "galaxy.bi.uni-freiburg.de/tool_runner"
+                ],
+                "id": "galaxy/peakachu/cmd/0.1.0.1"
+            }
+        ],
+        "disconnected": [
+            {
+                "name": "peakachu",
+                "types": "cmd",
+                "source": [
+                    "biotools"
+                ],
+                "description": "A supervised learning framework for chromatin loop detection in genome-wide contact maps. It can be used to visualize Hi-C, ChIA-PET, HiCHiP, PLAC-Seq, Capture Hi-C data.",
+                "repository": [],
+                "webpage": [
+                    "github.com/tariks/peakachu"
+                ],
+                "id": "biotools/peakachu/cmd/None"
+            }
+        ]
+    }
+}
