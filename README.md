@@ -6,54 +6,55 @@ The goal is to help human annotators decide whether two records refer to the sam
 
 
 ## What it currently does
-- Takes two JSON “tool docs” shaped like the metadata in our pipeline.
-- Uses a Jinja2 template (pair_panels.html.j2) to render each doc into a clean HTML panel (“A” and “B”).
-- Adds inline styles so the HTML renders reliably inside Label Studio.
-- Supports common fields: name, source, version, labels, repository, webpage, download, documentation, authors, license, description, input, output, etc.
-- Handles missing/optional fields gracefully.
-- Includes a helper (assignment.py) to assign 3 annotators per pair and generate a balanced set of Label Studio tasks.
 
-## How to render a single pair
-1.	Place your two JSON docs on disk, e.g. docA.json and docB.json.
-2.	Run the renderer script:
-    ```python
-    python render_pair.py docA.json docB.json
+- Loads candidate conflict pairs from `conflict_blocks.json` (produced by the Software Observatory pipeline).
+- Expands each entry to its full metadata (via `utils.build_instances_keys_dict` and `replace_with_full_entries`).
+- Builds disambiguation pairs with `pairing.build_pairs`.
+- Applies fixes to metadata (e.g. replaces old Galaxy links with https://usegalaxy.eu/root?).
+- Renders each pair into a clean HTML panel using the Jinja2 template `pair_panels.html.j2`.
+- Assigns 3 annotators per pair, cycling evenly through a list of historical scientists.
+- Produces a JSON file with all tasks for Label Studio.
+
+## How to run 
+
+ 1.	Ensure your environment has the dependencies installed:
+
+    ```bash
+    pip install -r requirements.txt
     ```
 
-This will output the combined HTML to preview_pair.html.
-
-## How to generate annotation tasks for multiple pairs
-
-If you have a list of pairs and want each pair annotated by 3 different annotators (balanced across all annotators):
-1. Edit assignment.py to list your pairs and annotators.
-2. Run:
-    ```python
-    python assignment.py
+ 2. Prepare your input file (example: `data/conflict_blocks_test.json`). 
+ 3. Run the script:
+    ```bash
+    python LS_dataset_generation.py
     ```
+ 4. The script will generate:
+    - `test_tasks.json` → tasks in JSON array format, ready for Label Studio import.
 
-3. This produces a tasks.json file in JSON array format, which Label Studio accepts.
-Each task includes:
-   - the rendered HTML (`data.html`)
-   - the pair_id
-   - the assigned annotator
+## Label Studio setup
 
-    Example task: 
+ 1.	In your Label Studio project, set the labeling interface to the config provided in `labelstudio_config.html`.
+	•	This config asks: *“Are A and B the same software?”*
+	•	It provides choices: **Yes / No / Unsure**, plus an optional notes box.
+ 
+ 2.	Import test_tasks.json. Each task contains:
+	•	`conflict_id` → unique ID of the conflict.
+	•	`annotator` → name of the assigned annotator.
+	•	`html` → the rendered HTML panels.
+ 
+ 3.	Annotators will see two panels (A and B), can navigate links, and record their judgment.
 
-    ```json
-    {
-    "id": "a0e7f8b9-1234-5678-9012-abcdef123456",
-    "data": {
-        "pair_id": "pair-001",
-        "annotator": "Captain Curator",
-        "html": "<div>…rendered HTML…</div>"
-    }
-    }
-    ```
+## Output example
 
+Each task in `test_tasks.json` looks like:
 
-## Using in Label Studio
-1.	In your project, set the labeling interface config to something like the content of labelstudio_config.html.
-2.	Import tasks.json from assignment.py (not the raw HTML).
-3.	Annotators will see two panels (A and B) and answer whether they are the same software.
-    ![Label interface of Label Studio](image-1.png)
-
+```json
+{
+  "id": "f6a24b9e-1234-4e7c-a89b-9db8fa04aabb",
+  "data": {
+    "conflict_id": "block-42",
+    "annotator": "Rosalind Franklin",
+    "html": "<div>…rendered HTML for pair A/B…</div>"
+  }
+}
+```
