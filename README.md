@@ -34,19 +34,16 @@ The goal is to help human annotators decide whether two records refer to the sam
 ## Label Studio setup
 
  1.	In your Label Studio project, set the labeling interface to the config provided in `labelstudio_config.html`. 
-   
-   -	This config asks: *“Are A and B the same software?”* 
 
-	-	It provides choices: **Yes / No / Unsure**, plus an optional notes box.
+- This config asks: *“Are A and B the same software?”*  
+- It provides choices: **Yes / No / Unsure**, plus an optional notes box.
  
  2.	Import test_tasks.json. Each task contains: 
    
-   -	`conflict_id` → unique ID of the conflict. 
+- `conflict_id` → unique ID of the conflict. 
+- `annotator` → name of the assigned annotator.  
+- `html` → the rendered HTML panels.
 
-	-	`annotator` → name of the assigned annotator.  
-   
-	-	`html` → the rendered HTML panels.
- 
  3.	Annotators will see two panels (A and B), can navigate links, and record their judgment.
 
 ## Output example
