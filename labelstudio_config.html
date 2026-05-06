@@ -1,21 +1,37 @@
 <View>
   <Header value="Are A and B the same software?" />
-  
-   <!-- The pair HTML -->
+
+  <!-- The pair HTML -->
   <View style="border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px; background: #fafafa;">
     <HyperText name="pair_html" value="$html" inline="true" />
   </View>
 
-  <!-- Answer box -->
+  <!-- Annotation box -->
   <View style="margin: 8px 0 16px 0; padding: 12px; border: 1px solid #e5e7eb; border-radius: 8px; background: #fbfbfb;">
-    <Header value="Answer" />
-    <Choices name="same_software" toName="pair_html" choice="single" required="true" style="margin-top: 8px;">
-      <Choice value="Yes" hotkey="1" />
-      <Choice value="No" hotkey="2" />
-      <Choice value="Unsure" hotkey="3" />
-    </Choices>
-    <TextArea name="notes" toName="pair_html" rows="3" placeholder="Any notes or reasoning…" style="margin-top: 10px;" />
-  </View>
+    <View style="display: flex; gap: 24px; align-items: flex-start;">
 
- 
+      <!-- Answer column -->
+      <View style="flex: 1;">
+        <Header value="Answer" />
+        <Choices name="same_software" toName="pair_html" choice="single" required="true" style="margin-top: 8px;">
+          <Choice value="Same" hotkey="1" />
+          <Choice value="Different" hotkey="2" />
+          <Choice value="Unclear" hotkey="3" />
+        </Choices>
+      </View>
+
+      <!-- Confidence column -->
+      <View style="flex: 1;">
+        <Header value="Confidence" />
+        <Choices name="confidence" toName="pair_html" choice="single" required="true" style="margin-top: 8px;">
+          <Choice value="High" hotkey="4" />
+          <Choice value="Medium" hotkey="5" />
+          <Choice value="Low" hotkey="6" />
+        </Choices>
+      </View>
+
+    </View>
+
+    <TextArea name="notes" toName="pair_html" rows="3" placeholder="Any notes or reasoning…" style="margin-top: 14px;" />
+  </View>
 </View>
