@@ -25,7 +25,7 @@ from pathlib import Path
 from bson import json_util
 
 from pairing import build_pairs
-from utils import replace_with_full_entries
+from utils import replace_with_full_entries, fix_galaxy_links
 
 logging.basicConfig(
     level=logging.INFO,
@@ -65,8 +65,8 @@ def build_all_enriched_pairs(conflict_blocks: dict) -> dict:
             continue
 
         for i, conflict_pair in enumerate(conflict_pairs):
-            item_a = conflict_pair["disconnected"][0]
-            item_b = conflict_pair["remaining"][0]
+            item_a = fix_galaxy_links(conflict_pair["disconnected"][0])
+            item_b = fix_galaxy_links(conflict_pair["remaining"][0])
 
             pair_id = key if len(conflict_pairs) == 1 else f"{key}__pair_{i + 1}"
             pairs[pair_id] = [item_a, item_b]

@@ -2,29 +2,10 @@ from pairing import build_pairs
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from bson import json_util
 import uuid
-import copy
 import json
 import random
 import os
 import re
-
-
-def fix_galaxy_links(doc):
-    """
-    Replace old Galaxy Freiburg tool_runner links with usegalaxy.eu root links.
-    """
-    new_doc = copy.deepcopy(doc)
-
-    if new_doc.get("data") and new_doc["data"].get("webpage"):
-        new_doc["data"]["webpage"] = [
-            link.replace(
-                "https://galaxy.bi.uni-freiburg.de/tool_runner?",
-                "https://usegalaxy.eu/root?"
-            )
-            for link in new_doc["data"]["webpage"]
-        ]
-
-    return new_doc
 
 
 def get_html_for_pair(itemA, itemB):
@@ -79,10 +60,7 @@ def assign_pairs_to_annotators(pairs, annotators, annotators_per_case=2):
             key=lambda annotator: (task_counts[annotator], random.random())
         )[:annotators_per_case]
 
-        itemA = fix_galaxy_links(rawA)
-        itemB = fix_galaxy_links(rawB)
-
-        html = get_html_for_pair(itemA, itemB)
+        html = get_html_for_pair(rawA, rawB)
 
         for annotator in selected_annotators:
             task_id = str(uuid.uuid4())
@@ -103,8 +81,8 @@ def assign_pairs_to_annotators(pairs, annotators, annotators_per_case=2):
                 tracking_records[pair_uid] = {
                     "pair_uid": pair_uid,
                     "conflict_id": pair_uid.split("__pair_")[0],
-                    "itemA": itemA,
-                    "itemB": itemB,
+                    "itemA": rawA,
+                    "itemB": rawB,
                     "html": html,
                     "annotators": {}
                 }
