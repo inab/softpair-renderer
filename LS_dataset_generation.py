@@ -1,4 +1,3 @@
-from utils import build_instances_keys_dict, replace_with_full_entries
 from pairing import build_pairs
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from bson import json_util
@@ -41,34 +40,22 @@ def slugify_name(name):
     return re.sub(r"[^a-z0-9]+", "_", name.lower()).strip("_")
 
 
-def build_final_pairs(conflict_blocks, sample_size=30):
+def load_enriched_pairs(path, sample_size=None):
     """
-    Build {conflict_id: [itemA, itemB]} for a random sample of up to `sample_size` conflicts.
+    Load pre-built enriched pairs from *path* and optionally sample *sample_size* of them.
+
+    The file is produced by build_enriched_pairs.py and must be generated before
+    running this script.  Both this pipeline and the automated disambiguation
+    pipeline must consume the same file.
     """
-    instances_dict = build_instances_keys_dict()
-    pairs = {}
+    with open(path, "r", encoding="utf-8") as fh:
+        all_pairs = json.load(fh)
 
-    all_ids = list(conflict_blocks.keys())
-    selected_ids = random.sample(all_ids, min(len(all_ids), sample_size))
+    if sample_size is None or sample_size >= len(all_pairs):
+        return all_pairs
 
-    for key in selected_ids:
-        conflict = conflict_blocks[key]
-        conflict_full = replace_with_full_entries(conflict, instances_dict)
-
-        conflict_pairs, _ = build_pairs(
-            copy.deepcopy(conflict_full),
-            key,
-            more_than_two_pairs=0
-        )
-
-        for i, conflict_pair in enumerate(conflict_pairs):
-            itemA = conflict_pair["disconnected"][0]
-            itemB = conflict_pair["remaining"][0]
-
-            pair_id = key if len(conflict_pairs) == 1 else f"{key}__pair_{i + 1}"
-            pairs[pair_id] = [itemA, itemB]
-
-    return pairs
+    selected_ids = random.sample(list(all_pairs.keys()), sample_size)
+    return {k: all_pairs[k] for k in selected_ids}
 
 
 def assign_pairs_to_annotators(pairs, annotators, annotators_per_case=2):
@@ -155,6 +142,22 @@ def write_split_task_files(tasks_by_annotator, output_dir, chunk_size=30):
 
             
 if __name__ == "__main__":
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Generate Label Studio annotation tasks from pre-built enriched pairs.")
+    parser.add_argument(
+        "--pairs",
+        required=True,
+        help="Path to the enriched-pairs JSON file produced by build_enriched_pairs.py.",
+    )
+    parser.add_argument(
+        "--sample-size",
+        type=int,
+        default=272,
+        help="Number of pairs to sample for annotation (default: 272).",
+    )
+    args = parser.parse_args()
+
     annotators = [
         "Marie Curie",
         "Rosalind Franklin",
@@ -162,16 +165,12 @@ if __name__ == "__main__":
         "Katherine Johnson",
     ]
 
-    SAMPLE_SIZE = 272
     ANNOTATORS_PER_CASE = 2
 
     # Optional reproducibility
     random.seed(42)
 
-    with open("data/conflicts.20260421T111602Z-8d84134d-manual_group_correction.json", "r", encoding="utf-8") as infile:
-        conflict_blocks = json.load(infile)
-
-    pairs = build_final_pairs(conflict_blocks, sample_size=SAMPLE_SIZE)
+    pairs = load_enriched_pairs(args.pairs, sample_size=args.sample_size)
 
     tasks_by_annotator, tracking_records = assign_pairs_to_annotators(
         pairs,
