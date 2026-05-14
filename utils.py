@@ -1,5 +1,19 @@
+import copy
 from bson import ObjectId
 
+
+def fix_galaxy_links(doc):
+    """Replace old Galaxy Freiburg tool_runner links with usegalaxy.eu root links."""
+    new_doc = copy.deepcopy(doc)
+    if new_doc.get("data") and new_doc["data"].get("webpage"):
+        new_doc["data"]["webpage"] = [
+            link.replace(
+                "https://galaxy.bi.uni-freiburg.de/tool_runner?",
+                "https://usegalaxy.eu/root?"
+            )
+            for link in new_doc["data"]["webpage"]
+        ]
+    return new_doc
 
 
 def build_instances_keys_dict():

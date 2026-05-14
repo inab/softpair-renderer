@@ -1,115 +1,176 @@
-from utils import build_instances_keys_dict, replace_with_full_entries
 from pairing import build_pairs
 from jinja2 import Environment, FileSystemLoader, select_autoescape
+from bson import json_util
 import uuid
-import copy
 import json
 import random
-
-
-def fix_galaxy_links(doc):
-    """
-    Replace 'galaxy.bi.uni-freiburg.de/tool_runner?' with 'https://usegalaxy.eu/root?' in data.webpage links.
-    """
-    new_links = []
-    if doc.get('data') and doc['data'].get('webpage'):
-        for link in doc['data']['webpage']:
-            new_links.append(link.replace(
-                "https://galaxy.bi.uni-freiburg.de/tool_runner?", 
-                "https://usegalaxy.eu/root?"
-            ))
-        doc['data']['webpage'] = new_links
-    return doc
+import os
+import re
 
 
 def get_html_for_pair(itemA, itemB):
     env = Environment(
-        loader=FileSystemLoader("."),  # template must be in current folder
+        loader=FileSystemLoader("."),
         autoescape=select_autoescape(enabled_extensions=("html", "j2"))
     )
     tpl = env.get_template("pair_panels.html.j2")
     return tpl.render(a=itemA, b=itemB)
 
 
-def build_final_pairs(conflict_blocks, sample_size=30):
+def slugify_name(name):
+    return re.sub(r"[^a-z0-9]+", "_", name.lower()).strip("_")
+
+
+def load_enriched_pairs(path, sample_size=None):
     """
-    Build {conflict_id: [itemA, itemB]} for a random sample of up to `sample_size` conflicts.
+    Load pre-built enriched pairs from *path* and optionally sample *sample_size* of them.
+
+    The file is produced by build_enriched_pairs.py and must be generated before
+    running this script.  Both this pipeline and the automated disambiguation
+    pipeline must consume the same file.
     """
-    instances_dict = build_instances_keys_dict()
-    pairs = {}
+    with open(path, "r", encoding="utf-8") as fh:
+        all_pairs = json.load(fh)
 
-    all_ids = list(conflict_blocks.keys())
-    selected_ids = random.sample(all_ids, min(len(all_ids), sample_size))
+    if sample_size is None or sample_size >= len(all_pairs):
+        return all_pairs
 
-    for key in selected_ids:
-        conflict = conflict_blocks[key]
-        conflict_full = replace_with_full_entries(conflict, instances_dict)
-
-        # build_disambiguation_pairs - merge occurs here
-        conflict_pairs, _ = build_pairs(copy.deepcopy(conflict_full), key, more_than_two_pairs=0)
-
-        for conflict_pair in conflict_pairs:
-            itemA = conflict_pair["disconnected"][0]
-            itemB = conflict_pair["remaining"][0]
-            pairs[key] = [itemA, itemB]
-            # If multiple pairs per conflict_id could exist and you need all, adapt structure accordingly.
-
-    return pairs
+    selected_ids = random.sample(list(all_pairs.keys()), sample_size)
+    return {k: all_pairs[k] for k in selected_ids}
 
 
+def assign_pairs_to_annotators(pairs, annotators, annotators_per_case=2):
+    """
+    Assign each pair to annotators and keep a tracking manifest.
+
+    Returns:
+        tasks_by_annotator: {annotator_name: [Label Studio tasks]}
+        tracking_records: flat list with one row per annotator-task assignment
+    """
+    tasks_by_annotator = {annotator: [] for annotator in annotators}
+    task_counts = {annotator: 0 for annotator in annotators}
+    tracking_records = {}
+
+    pair_items = list(pairs.items())
+    random.shuffle(pair_items)
+
+    for pair_uid, (rawA, rawB) in pair_items:
+        selected_annotators = sorted(
+            annotators,
+            key=lambda annotator: (task_counts[annotator], random.random())
+        )[:annotators_per_case]
+
+        html = get_html_for_pair(rawA, rawB)
+
+        for annotator in selected_annotators:
+            task_id = str(uuid.uuid4())
+
+            task = {
+                "id": task_id,
+                "data": {
+                    "pair_uid": pair_uid,
+                    "conflict_id": pair_uid.split("__pair_")[0],
+                    "annotator": annotator,
+                    "html": html
+                }
+            }
+
+            tasks_by_annotator[annotator].append(task)
+
+            if pair_uid not in tracking_records:
+                tracking_records[pair_uid] = {
+                    "pair_uid": pair_uid,
+                    "conflict_id": pair_uid.split("__pair_")[0],
+                    "itemA": rawA,
+                    "itemB": rawB,
+                    "html": html,
+                    "annotators": {}
+                }
+
+            tracking_records[pair_uid]["annotators"][annotator] = {
+                "task_id": task_id
+            }
+
+            task_counts[annotator] += 1
+
+    return tasks_by_annotator, list(tracking_records.values())
+
+def write_split_task_files(tasks_by_annotator, output_dir, chunk_size=30):
+    """
+    Write one or more JSON files per annotator, split into chunks of `chunk_size`.
+    """
+    os.makedirs(output_dir, exist_ok=True)
+
+    for annotator, tasks in tasks_by_annotator.items():
+        annotator_slug = slugify_name(annotator)
+
+        for chunk_idx, start in enumerate(range(0, len(tasks), chunk_size), start=1):
+            chunk = tasks[start:start + chunk_size]
+
+            filename = f"tasks_{annotator_slug}_part_{chunk_idx:02d}.json"
+            path = os.path.join(output_dir, filename)
+
+            with open(path, "w", encoding="utf-8") as f:
+                json.dump(chunk, f, ensure_ascii=False, indent=2)
+
+            print(
+                f"{annotator}: part {chunk_idx:02d} "
+                f"({len(chunk)} tasks) -> {path}"
+            )
+
+            
 if __name__ == "__main__":
-    # 18 annotators (full roster)
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Generate Label Studio annotation tasks from pre-built enriched pairs.")
+    parser.add_argument(
+        "--pairs",
+        required=True,
+        help="Path to the enriched-pairs JSON file produced by build_enriched_pairs.py.",
+    )
+    parser.add_argument(
+        "--sample-size",
+        type=int,
+        default=272,
+        help="Number of pairs to sample for annotation (default: 272).",
+    )
+    args = parser.parse_args()
+
     annotators = [
         "Marie Curie",
         "Rosalind Franklin",
         "Chien-Shiung Wu",
         "Katherine Johnson",
-        "Dorothy Hodgkin",
-        "Barbara McClintock",
-        "Vera Rubin",
-        "Sally Ride",
-        "Sofia Kovalevskaya",  # (Sophia)
-        "Rachel Carson",
-        "Margarita Salas",
-        "Emmy Noether",
-        "Ada Lovelace",
-        "Florence Nightingale",
-        "Hedy Lamarr",
-        "Tu Youyou",
-        "Rita Levi-Montalcini",
-        "Mae Jemison",
     ]
 
-    # For reproducibility, optionally set a seed:
-    # random.seed(42)
+    ANNOTATORS_PER_CASE = 2
 
-    with open("data/conflict_blocks_0.3.json","r", encoding="utf-8") as infile:
-        conflict_blocks = json.load(infile)
+    # Optional reproducibility
+    random.seed(42)
 
-    # Build only 30 randomly selected pairs
-    pairs = build_final_pairs(conflict_blocks, sample_size=30)
+    pairs = load_enriched_pairs(args.pairs, sample_size=args.sample_size)
 
-    
-    n = 0
-    tasks = []
-    for pair_id, (rawA, rawB) in pairs.items():
-        
-        # Fix links before rendering HTML
-        itemA = fix_galaxy_links(rawA)
-        itemB = fix_galaxy_links(rawB)
+    tasks_by_annotator, tracking_records = assign_pairs_to_annotators(
+        pairs,
+        annotators,
+        annotators_per_case=ANNOTATORS_PER_CASE
+    )
 
-        html = get_html_for_pair(itemA, itemB)
+    output_dir = "labelstudio_tasks_by_annotator"
 
-        # Every annotator annotates this pair
-        tasks.append({
-            "id": str(uuid.uuid4()),
-            "data": {
-                "conflict_id": pair_id,
-                "html": html
-            }
-        })
-        
+    write_split_task_files(
+        tasks_by_annotator,
+        output_dir=output_dir,
+        chunk_size=30
+    )
 
-    with open('tasks_30.json', "w", encoding="utf-8") as f:
-        json.dump(tasks, f, ensure_ascii=False, indent=2)
-        
+    with open("labelstudio_pair_assignment_manifest.json", "w", encoding="utf-8") as f:
+        json.dump(
+            tracking_records,
+            f,
+            ensure_ascii=False,
+            indent=2,
+            default=json_util.default
+        )
+
+    print(f"Tracking manifest written with {len(tracking_records)} task assignments.")
